@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}ورود به حساب کاربری{% endblock %}
+
+{% block content %}
+  
+    <div class="container IranBold">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+        <div class="col-xl-11 col-lg-12 col-md-9 mt-5">
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger alert-dismissible fade show text-right sfont" role="alert">
+                    {% for error in form.non_field_errors %}
+                        <i class="fa fa-times-circle" aria-hidden="true"></i> {{ error }}
+                    {% endfor %}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-xl-8 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg mb-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-10 mx-auto">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">ورود به حساب کاربری</h1>
+                                    </div>
+                                    
+                                    <form action="{% url 'login' %}" class="needs-validation user" method="post" novalidate>
+                                        {% csrf_token %}
+                                        <div class="form-row mb-2">
+                                            <div class="col-md-12 mb-3">
+                                                <input name="username" type="text" class="form-control sfont" placeholder="نام کاربری" id="id_username" required>
+                                                {% if form.username.errors %}
+                                                {% for error in form.username.errors %}
+                                                    <div class="wrong-d text-right mr-2" >
+                                                    {{ error }}
+                                                    </div>
+                                                {% endfor %}
+                                                {% endif %}
+                                                <div class="invalid-feedback text-right mr-2">
+                                                نام کاربری الزامی است!
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <input name="password" type="password" class="form-control sfont" placeholder="رمزعبور" id="id_password" required>
+                                                {% if form.password.errors %}
+                                                {% for error in form.password.errors %}
+                                                    <div class="wrong-d text-right mr-2" >
+                                                    {{ error }}
+                                                    </div>
+                                                {% endfor %}
+                                                {% endif %}
+                                                <div class="invalid-feedback text-right mr-2" >
+                                                رمزعبور الزامی است!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="next" value="{{ value }}">
+                                        <button class="btn btn-primary  btn-block" type="submit">ورود</button>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small mb-2 mb-sm-0 badge badge-info py-2 px-3" href="{% url 'signup' %}">ایجاد حساب</a>
+                                        <a class="small badge badge-danger py-2 px-3" href="{% url 'password_reset' %}">فراموشی رمزعبور</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

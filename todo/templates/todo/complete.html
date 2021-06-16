@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load base_tags %}
+
+{% block title %}لیست تودوهای تکمیل شده{% endblock %}
+
+{% block content %}
+    <div id="wrapper">
+
+        {% include 'account/sidebar.html' %}
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column IranBold">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                {% include 'account/top_navbar.html' %}
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">لیست تودوهای تکمیل شده</h1>
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+                        <!-- ُTodo List -->
+                        <div class="col-xl-12 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">لیست تودوهای تکمیل شده</h6>
+                                    
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body text-center">
+                                    {% if object_list %}
+                                        <div class="table-responsive rounded">
+                                            <table class="table table-hover">
+                                                <thead class="text-white bg-info">
+                                                    <tr>
+                                                        <th scope="col">عنوان</th>
+                                                        <th scope="col">توضیحات</th>
+                                                        <th scope="col">مهم</th>
+                                                        <th scope="col"> </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="sfont">
+                                                    {% for todo in object_list %}
+                                                        <tr {% if todo.important %} class="table-danger"{% endif %}>
+                                                            <td>{{ todo.title }}</td>
+                                                            {% if todo.memo %}
+                                                                <td>
+                                                                    <details>
+                                                                        <summary>توضیحات</summary>
+                                                                        <p>{{ todo.memo }}</p>
+                                                                    </details>
+                                                                </td>
+                                                            {% else %}
+                                                                <td></td>
+                                                            {% endif %}
+                                                            {% if todo.important %} 
+                                                                <td>*</td> 
+                                                            {% else %}
+                                                                <td></td>
+                                                            {% endif %}
+                                                            <td>
+                                                                {% if not todo.datecomplete %}
+                                                                    <a class="btn btn-block btn-sm btn-primary font-weight-bold mb-2 " href="{% url 'todo:todo_update' todo.pk %}">ویرایش</a>
+                                                                {% endif %}
+                                                                    <a class="btn btn-block btn-sm btn-danger font-weight-bold mb-2" href="{% url 'todo:todo_delete' todo.pk %}">حذف</a>
+                                                                {% if todo.datecomplete is None %}
+                                                                    <form class="d-inline" method="POST" action="{% url 'todo:completetodo' todo.pk %}">
+                                                                        {% csrf_token %}
+                                                                        <button class="btn btn-block btn-success btn-sm font-weight-bold" id="complete" type="submit">تکمیل</button>
+                                                                    </form>
+                                                                {% else %}
+                                                                    <div class="badge badge-info font-weight-bold py-2"><span>کامل شد</span></div>
+                                                                {% endif %}
+                                                            </td>
+                                                        </tr>                                                  
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-info">
+                                            <span>شما در حال حاضر هیچ تودو ای ندارید.</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span><a href='https://gitlab.com/ysnalpr/todoproject.git' target="_blank" class="text-dark">Source code</a></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+{% endblock %}

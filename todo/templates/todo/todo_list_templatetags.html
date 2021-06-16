@@ -1,0 +1,64 @@
+<div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+        
+    </div>
+    <!-- Card Body -->
+    <div class="card-body text-center">
+        {% if latest_todos %}
+            <div class="table-responsive rounded">
+                <table class="table table-hover">
+                    <thead class="text-white bg-info">
+                        <tr>
+                            <th scope="col">عنوان</th>
+                            <th scope="col">توضیحات</th>
+                            <th scope="col">مهم</th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+                    <tbody class="sfont">
+                        {% for todo in latest_todos %}
+                            <tr {% if todo.important %} class="table-danger"{% endif %}>
+                                <td>{{ todo.title }}</td>
+                                {% if todo.memo %}
+                                    <td>
+                                        <details>
+                                            <summary>توضیحات</summary>
+                                            <p>{{ todo.memo }}</p>
+                                        </details>
+                                    </td>
+                                {% else %}
+                                    <td></td>
+                                {% endif %}
+                                {% if todo.important %} 
+                                    <td>*</td> 
+                                {% else %}
+                                    <td></td>
+                                {% endif %}
+                                <td>
+                                    {% if not todo.datecomplete %}
+                                        <a class="btn btn-block btn-sm btn-primary font-weight-bold mb-2 " href="{% url 'todo:todo_update' todo.pk %}">ویرایش</a>
+                                    {% endif %}
+                                        <a class="btn btn-block btn-sm btn-danger font-weight-bold mb-2" href="{% url 'todo:todo_delete' todo.pk %}">حذف</a>
+                                    {% if todo.datecomplete is None %}
+                                        <form class="d-inline" method="POST" action="{% url 'todo:completetodo' todo.pk %}">
+                                            {% csrf_token %}
+                                            <button class="btn btn-block btn-success btn-sm font-weight-bold" id="complete" type="submit">تکمیل</button>
+                                        </form>
+                                    {% else %}
+                                        <div class="badge badge-info font-weight-bold py-2"><span>کامل شد</span></div>
+                                    {% endif %}
+                                </td>
+                            </tr>                                                  
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                <span>شما در حال حاضر هیچ تودو ای ندارید.</span>
+            </div>
+        {% endif %}
+    </div>
+</div>

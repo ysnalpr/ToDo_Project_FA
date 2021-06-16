@@ -1,0 +1,87 @@
+{% load static %}
+{% load mytags %}
+<!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion p-0 IranBold" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'todo:dashboard' %}">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">{% if request.user.get_full_name %} {{ request.user.get_full_name }} {% else %} {{ request.user.username }} {% endif %}</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider ">
+        <div class="sidebar-heading">
+            حساب کاربری
+        </div>
+        
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item {% navactive request 'todo:dashboard' %}">
+            <a class="nav-link" href="{% url 'todo:dashboard' %}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>داشبورد</span>
+            </a>
+        </li>
+        <li class="nav-item {% navactive request 'account:profile' %}">
+            <a class="nav-link" href="{% url 'account:profile' %}">
+                <i class="fas fa-fw fa-user"></i>
+                <span>پروفایل</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            تودو
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item {% navactive request 'todo:todo_create' %}">
+            <a class="nav-link" href="{% url 'todo:todo_create' %}">
+                <i class="fas fa-fw fa-edit"></i>
+                <span>اضافه کردن تودو</span>
+            </a>
+        </li>
+        <li class="nav-item {% navactive request 'todo:current_todo' %}">
+            <a class="nav-link" href="{% url 'todo:current_todo' %}">
+                <i class="fas fa-fw fa-list"></i>
+                <span>لیست تودوها</span>
+            </a>
+        </li>
+        <li class="nav-item {% navactive request 'todo:complete_todo' %}">
+            <a class="nav-link" href="{% url 'todo:complete_todo' %}">
+                <i class="fas fa-fw fa-list-ol"></i>
+                <span>تودوهای کامل شده</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            تماس باما
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item {% navactive request 'contact:contact' %}">
+            <a class="nav-link" href="{% url 'contact:contact' %}">
+                <i class="fas fa-fw fa-phone"></i>
+                <span>تماس با ما</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+<!-- End of Sidebar -->

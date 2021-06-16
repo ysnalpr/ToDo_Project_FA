@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load base_tags %}
+
+{% block title %}داشبورد{% endblock %}
+
+{% block content %}
+    <div id="wrapper">
+
+        {% include 'account/sidebar.html' %}
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column IranBold">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                {% include 'account/top_navbar.html' %}
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">داشبورد</h1>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row text-right d-flex justify-content-around">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-5 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><a href="{% url 'todo:current_todo' %}">تودو های حاضر</a></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{% current_todos %}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clock fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-5 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a href="{% url 'todo:complete_todo' %}">تودو های تکمیل شده</a></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{% complete_todos %}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-check fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-7 mx-auto">
+                            {% if messages %}
+                                <div class="alert alert-primary alert-dismissible fade show text-right shadow rounded" role="alert">
+                                    {% for message in messages %}
+                                        {% if message.success %}
+                                            <p {% if message.tags %} class="{{ message.tags }} my-0"{% endif %}><i class="fa fa-check-circle" aria-hidden="true"></i> {{ message }}</p>
+                                        {% else %}
+                                            <p class="my-0"><i class="fa fa-times-circle" aria-hidden="true"></i> {{ message }}</p>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <!-- ُTodo List -->
+                        <div class="col-xl-6 col-lg-7">
+                            {% show_latest_todos %}
+                        </div>
+                        <div class="col-xl-6 col-lg-7">
+                            {% show_latest_complete_todos %}
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span><a href='https://gitlab.com/ysnalpr/todoproject.git' target="_blank" class="text-dark">Source code</a></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+{% endblock %}

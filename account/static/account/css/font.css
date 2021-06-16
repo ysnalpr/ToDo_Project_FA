@@ -1,0 +1,8 @@
+@font-face {
+    font-family: "Roboto";
+    src: url(../fonts/Roboto/Roboto-Regular.ttf);
+    font-family: "Iransans";
+    src: url(../fonts/IranSans/iransans_medium.ttf);
+    font-family: "IransansBold";
+    src: url(../fonts/IranSans/IranSansBold.ttf);
+}
