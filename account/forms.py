@@ -12,7 +12,7 @@ class ProfileForm(forms.ModelForm):
         super(ProfileForm, self).__init__(*args, **kwargs)
 
         self.fields['date_of_birth'] = JalaliDateField(label=('تاریخ تولد'), # date format is  "yyyy-mm-dd"
-            widget=AdminJalaliDateWidget # optional, to use default datepicker
+            widget=AdminJalaliDateWidget, required=False # optional, to use default datepicker
         )
         
         self.fields['username'].help_text = None

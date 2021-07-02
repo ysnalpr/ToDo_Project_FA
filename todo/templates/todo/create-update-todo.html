@@ -5,9 +5,9 @@
 
 {% block title %}
     {% if object %}
-        ویرایش تودو
+        ویرایش کار
     {% else %}
-        ایجاد تودو
+        ایجاد کار جدید
     {% endif %}
 {% endblock %}
 
@@ -32,11 +32,11 @@
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800 mx-auto IranBold text-center">
                             {% if object %}
-                                <div>ویرایش تودو</div>
+                                <div>ویرایش کار</div>
                                 <hr>
                                 <div class="text-muted small mt-2">تاریخ ایجاد:‌ {{ object.created|to_jalali:'14%y/%m/%d' }}</div>
                             {% else %}
-                                ایجاد تودو
+                                ایجاد کار جدید
                             {% endif %}
                         </h1>
                     </div>
@@ -47,9 +47,9 @@
                             <div class="card-header py-3 d-flex bg-primary flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-light IranBold">
                                     {% if object %}
-                                        ویرایش تودو
+                                        ویرایش کار
                                     {% else %}
-                                        ایجاد تودو
+                                        ایجاد کار جدید
                                     {% endif %}
                                 </h6>
                             </div>

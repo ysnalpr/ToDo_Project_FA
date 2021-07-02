@@ -17,10 +17,12 @@ def complete_todos(context):
 def show_latest_todos(context):
     request = context['request']
     latest_todos =  ToDo.objects.filter(user=request.user, datecomplete__isnull=True).order_by('-created')[:3]
-    return {'latest_todos': latest_todos, 'title': 'تودوهای اخیر'}
+    alert = 'شما در حال حاضر کاری برای انجام دادن ندارید.'
+    return {'latest_todos': latest_todos, 'title': 'کارهای ایجاد اخیر', 'alert': alert}
 
 @register.inclusion_tag('todo/todo_list_templatetags.html', takes_context=True)
 def show_latest_complete_todos(context):
     request = context['request']
     latest_todos =  ToDo.objects.filter(user=request.user, datecomplete__isnull=False).order_by('-created')[:3]
-    return {'latest_todos': latest_todos, 'title': 'تودوهای کامل شده اخیر'}
+    alert = 'شما هیچ کار کامل شده ای ندارید.'
+    return {'latest_todos': latest_todos, 'title': 'کارهای کامل شده اخیر', 'alert': alert}

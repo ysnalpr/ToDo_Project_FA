@@ -13,7 +13,6 @@
                         <tr>
                             <th scope="col">عنوان</th>
                             <th scope="col">توضیحات</th>
-                            <th scope="col">مهم</th>
                             <th scope="col"> </th>
                         </tr>
                     </thead>
@@ -31,23 +30,18 @@
                                 {% else %}
                                     <td></td>
                                 {% endif %}
-                                {% if todo.important %} 
-                                    <td>*</td> 
-                                {% else %}
-                                    <td></td>
-                                {% endif %}
                                 <td>
                                     {% if not todo.datecomplete %}
-                                        <a class="btn btn-block btn-sm btn-primary font-weight-bold mb-2 " href="{% url 'todo:todo_update' todo.pk %}">ویرایش</a>
+                                        <a class="btn btn-sm btn-primary font-weight-bold mb-2 mb-md-0" href="{% url 'todo:todo_update' todo.pk %}" style="padding: 5px 15px;">ویرایش</a>
                                     {% endif %}
-                                        <a class="btn btn-block btn-sm btn-danger font-weight-bold mb-2" href="{% url 'todo:todo_delete' todo.pk %}">حذف</a>
+                                        <a class="btn btn-sm btn-danger font-weight-bold mb-2 mb-md-0 " href="{% url 'todo:todo_delete' todo.pk %}" style="padding: 5px 20px;">حذف</a>
                                     {% if todo.datecomplete is None %}
-                                        <form class="d-inline" method="POST" action="{% url 'todo:completetodo' todo.pk %}">
+                                        <form class="d-inline " method="POST" action="{% url 'todo:completetodo' todo.pk %}">
                                             {% csrf_token %}
-                                            <button class="btn btn-block btn-success btn-sm font-weight-bold" id="complete" type="submit">تکمیل</button>
+                                            <button class="btn btn-success btn-sm font-weight-bold mb-2 mb-md-0" id="complete" type="submit" style="padding: 5px 18px;">تکمیل</button>
                                         </form>
                                     {% else %}
-                                        <div class="badge badge-info font-weight-bold py-2"><span>کامل شد</span></div>
+                                        <div class="badge badge-info font-weight-bold " style="padding: 10px 15px;"><span>کامل شد</span></div>
                                     {% endif %}
                                 </td>
                             </tr>                                                  
@@ -57,7 +51,7 @@
             </div>
         {% else %}
             <div class="alert alert-info">
-                <span>شما در حال حاضر هیچ تودو ای ندارید.</span>
+                <span>{{ alert }}</span>
             </div>
         {% endif %}
     </div>

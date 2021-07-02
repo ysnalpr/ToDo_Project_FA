@@ -4,6 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.views.generic.detail import DetailView
 
 
 from .models import ToDo
@@ -16,15 +17,21 @@ def home(request):
 
 
 class CurrentToDoList(ListView):
+    paginate_by = 5
     def get_queryset(self):
         return ToDo.objects.filter(user=self.request.user, datecomplete__isnull=True)
     template_name = 'todo/current.html'
 
 
 class CompleteToDoList(ListView):
+    paginate_by = 5
     def get_queryset(self):
         return ToDo.objects.filter(user=self.request.user, datecomplete__isnull=False)
     template_name = 'todo/complete.html'
+
+
+class TodoDetail(DetailView):
+    model = ToDo
 
 
 class ToDoCreate(SuccessMessageMixin, OwnerToDoEditMixin, CreateView):

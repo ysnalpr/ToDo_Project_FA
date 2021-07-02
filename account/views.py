@@ -55,7 +55,7 @@ class SignUpUser(CreateView):
                     mail_subject, message, to=[to_email]
         )
         email.send()
-        return HttpResponse('لینک فعال سازی ایمیل کاربری به ایمیل شما ارسال شد. <a href="/login">ورود</a>')
+        return render(self.request, 'registration/sign_up_confirm.html')
 
 
 def activate(request, uidb64, token):
@@ -67,9 +67,11 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        return HttpResponse('حساب کاربری شما فعال شد. برای ورود <a href="/login">کلیک </a> کنید.')
+        # return HttpResponse('حساب کاربری شما فعال شد. برای ورود <a href="/login">کلیک </a> کنید.')
+        return render(request, 'registration/account_confirmed.html')
     else:
-        return HttpResponse('لینک فعال سازی نامعتبر است! <a href="/register">دوباره امتحان کنید</a>')
+        # return HttpResponse('لینک فعال سازی نامعتبر است! <a href="/register">دوباره امتحان کنید</a>')
+        return render(request, 'registration/invalid_token.html')
 
 def error_404(request, exception):
         return render(request,'account/error_404.html', {})

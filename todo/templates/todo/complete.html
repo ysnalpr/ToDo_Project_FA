@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load base_tags %}
+{% load jalali_tags %}
 
-{% block title %}لیست تودوهای تکمیل شده{% endblock %}
+{% block title %}لیست کارهای تکمیل شده{% endblock %}
 
 {% block content %}
     <div id="wrapper">
@@ -24,18 +25,18 @@
 
                     <!-- Page Heading -->
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">لیست تودوهای تکمیل شده</h1>
+                        <h1 class="h3 mb-0 text-gray-800">لیست کارهای تکمیل شده</h1>
                     </div>
 
                     <!-- Content Row -->
 
                     <div class="row">
                         <!-- ُTodo List -->
-                        <div class="col-xl-12 col-lg-7">
+                        <div class="col-xl-12">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">لیست تودوهای تکمیل شده</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">لیست کارهای تکمیل شده</h6>
                                     
                                 </div>
                                 <!-- Card Body -->
@@ -46,7 +47,8 @@
                                                 <thead class="text-white bg-info">
                                                     <tr>
                                                         <th scope="col">عنوان</th>
-                                                        <th scope="col">توضیحات</th>
+                                                        <th scope="col">کی ایجاد شد؟</th>
+                                                        <th scope="col">کی کامل شد؟</th>
                                                         <th scope="col">مهم</th>
                                                         <th scope="col"> </th>
                                                     </tr>
@@ -55,34 +57,17 @@
                                                     {% for todo in object_list %}
                                                         <tr {% if todo.important %} class="table-danger"{% endif %}>
                                                             <td>{{ todo.title }}</td>
-                                                            {% if todo.memo %}
-                                                                <td>
-                                                                    <details>
-                                                                        <summary>توضیحات</summary>
-                                                                        <p>{{ todo.memo }}</p>
-                                                                    </details>
-                                                                </td>
-                                                            {% else %}
-                                                                <td></td>
-                                                            {% endif %}
+                                                            <td>{{ todo.created|to_jalali:'14%y/%m/%d' }}</td>
+                                                            <td>{{ todo.datecomplete|to_jalali:'14%y/%m/%d' }}</td> 
                                                             {% if todo.important %} 
                                                                 <td>*</td> 
                                                             {% else %}
                                                                 <td></td>
                                                             {% endif %}
                                                             <td>
-                                                                {% if not todo.datecomplete %}
-                                                                    <a class="btn btn-block btn-sm btn-primary font-weight-bold mb-2 " href="{% url 'todo:todo_update' todo.pk %}">ویرایش</a>
-                                                                {% endif %}
-                                                                    <a class="btn btn-block btn-sm btn-danger font-weight-bold mb-2" href="{% url 'todo:todo_delete' todo.pk %}">حذف</a>
-                                                                {% if todo.datecomplete is None %}
-                                                                    <form class="d-inline" method="POST" action="{% url 'todo:completetodo' todo.pk %}">
-                                                                        {% csrf_token %}
-                                                                        <button class="btn btn-block btn-success btn-sm font-weight-bold" id="complete" type="submit">تکمیل</button>
-                                                                    </form>
-                                                                {% else %}
-                                                                    <div class="badge badge-info font-weight-bold py-2"><span>کامل شد</span></div>
-                                                                {% endif %}
+                                                                <a class="btn btn-sm btn-primary font-weight-bold mb-2 mb-md-0" href="{% url 'todo:todo_detail' todo.pk %}" style="padding: 5px 13px;">جزعیات</a>
+                                                                <a class="btn btn-sm btn-danger font-weight-bold mb-2 mb-md-0" href="{% url 'todo:todo_delete' todo.pk %}" style="padding: 5px 20px;">حذف</a>
+                                                                <div class="badge badge-info font-weight-bold " style="padding: 10px 15px;"><span>کامل شد</span></div>
                                                             </td>
                                                         </tr>                                                  
                                                     {% endfor %}
@@ -91,11 +76,41 @@
                                         </div>
                                     {% else %}
                                         <div class="alert alert-info">
-                                            <span>شما در حال حاضر هیچ تودو ای ندارید.</span>
+                                            <span>شما هیچ کار کامل شده ای ندارید.</span>
                                         </div>
                                     {% endif %}
                                 </div>
                             </div>
+                            <!-- Paginator -->
+                            {% if is_paginated %}
+                                <nav dir='ltr' aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        {% if page_obj.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                                        {% endif %}
+                                        {% for i in paginator.page_range %}
+                                            {% if page_obj.number == i %}
+                                                <li class="active page-item">
+                                                    <span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if page_obj.has_next %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                                        {% else %}
+                                            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

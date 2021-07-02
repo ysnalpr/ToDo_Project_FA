@@ -43,19 +43,19 @@
         <li class="nav-item {% navactive request 'todo:todo_create' %}">
             <a class="nav-link" href="{% url 'todo:todo_create' %}">
                 <i class="fas fa-fw fa-edit"></i>
-                <span>اضافه کردن تودو</span>
+                <span>اضافه کردن کار جدید</span>
             </a>
         </li>
         <li class="nav-item {% navactive request 'todo:current_todo' %}">
             <a class="nav-link" href="{% url 'todo:current_todo' %}">
                 <i class="fas fa-fw fa-list"></i>
-                <span>لیست تودوها</span>
+                <span>لیست کارها</span>
             </a>
         </li>
         <li class="nav-item {% navactive request 'todo:complete_todo' %}">
             <a class="nav-link" href="{% url 'todo:complete_todo' %}">
                 <i class="fas fa-fw fa-list-ol"></i>
-                <span>تودوهای کامل شده</span>
+                <span>کارهای کامل شده</span>
             </a>
         </li>
 

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load jalali_tags %}
+
+{% block title %} {{ object.title }} {% endblock %}
+
+
+{% block content %}
+    <div id="wrapper">
+
+        {% include 'account/sidebar.html' %}
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column IranBold">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                {% include 'account/top_navbar.html' %}
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Content Row -->
+                    <div class="row">
+                        <!-- ُTodo List -->
+                        <div class="col-xl-12">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">جزعیات « {{ todo.title }} »</h6>
+                                    
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body text-center">
+                                    <h2>{{ object.title }}</h2>
+                                    <hr class="w-50">
+                                    <p>
+                                        <span class="d-block d-lg-inline bg-info text-light p-2 rounded mb-2 mb-lg-0 ml-0 ml-lg-2">تاریخ ایجاد:‌ {{ object.created|to_jalali:'%H:%m:%S | 14%y/%m/%d' }}</span> <span class="bg-secondary text-light p-2 rounded d-block d-lg-inline">تاریخ تکمیل:‌ {{ object.datecomplete|to_jalali:'%H:%m:%S | 14%y/%m/%d' }}</span>
+                                    </p>
+                                    <p class="mt-5">
+                                        {% if object.memo %}
+                                            توضیحات :{{ object.memo }}
+                                        {% else %}
+                                            توضیحات: ندارد.
+                                        {% endif %}
+                                    </p>
+                                    <h5 class="{% if todo.important %}text-danger {% else %}text-warning{% endif %}">
+                                        {% if todo.important %}
+                                            به عنوان کار مهم علامت گذاری شده است.
+                                        {% else %}
+                                            به عنوان کار مهم علامت گذاری نشده است.
+                                        {% endif %}
+                                    </h5>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span><a href='https://gitlab.com/ysnalpr/todoproject.git' target="_blank" class="text-dark">Source code</a></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+{% endblock %}
