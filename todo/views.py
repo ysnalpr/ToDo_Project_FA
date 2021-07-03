@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -8,7 +9,7 @@ from django.views.generic.detail import DetailView
 
 
 from .models import ToDo
-from .mixins import OwnerToDoMixin, OwnerToDoEditMixin
+from .mixins import OwnerToDoMixin, OwnerToDoEditMixin, OwnerMixin
 
 # Create your views here.
 
@@ -30,7 +31,7 @@ class CompleteToDoList(ListView):
     template_name = 'todo/complete.html'
 
 
-class TodoDetail(DetailView):
+class TodoDetail(LoginRequiredMixin, OwnerMixin, DetailView):
     model = ToDo
 
 

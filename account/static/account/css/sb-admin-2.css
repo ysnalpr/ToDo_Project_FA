@@ -11695,3 +11695,9 @@ body {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.sfont2 {
+    font-size: 12px !important;
+    font-family: 'Iransans' !important;
+    font-weight: bold;
+}
