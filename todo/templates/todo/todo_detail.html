@@ -35,17 +35,17 @@
                                 <div class="card-body text-center">
                                     <h5>{{ object.title }}</h5>
                                     <hr class="w-50">
-                                    <p class="sfont">
+                                    <p class="sfont2">
                                         <span class="d-block d-lg-inline bg-info text-light p-2 rounded mb-2 mb-lg-0 ml-0 ml-lg-2">تاریخ ایجاد:‌ {{ object.created|to_jalali:'%H:%m:%S | 14%y/%m/%d' }}</span> <span class="bg-secondary text-light p-2 rounded d-block d-lg-inline">تاریخ تکمیل:‌ {{ object.datecomplete|to_jalali:'%H:%m:%S | 14%y/%m/%d' }}</span>
                                     </p>
-                                    <p class="mt-5 sfont">
+                                    <p class="mt-5 sfont2">
                                         {% if object.memo %}
                                             توضیحات :{{ object.memo }}
                                         {% else %}
                                             توضیحات: ندارد.
                                         {% endif %}
                                     </p>
-                                    <h6 class="{% if todo.important %}text-danger {% else %}text-warning{% endif %}">
+                                    <h6 class="sfont {% if todo.important %}text-danger {% else %}text-warning{% endif %}">
                                         {% if todo.important %}
                                             به عنوان کار مهم علامت گذاری شده است.
                                         {% else %}

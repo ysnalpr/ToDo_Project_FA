@@ -25,6 +25,12 @@ body {
     font-weight: bold;
 }
 
+.sfont2 {
+    font-size: 12px !important;
+    font-family: 'Iransans' !important;
+    font-weight: bold;
+}
+
 .avatar-upload {
     position: relative;
     max-width: 205px;
