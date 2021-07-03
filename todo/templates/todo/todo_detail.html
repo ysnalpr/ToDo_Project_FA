@@ -33,25 +33,25 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body text-center">
-                                    <h2>{{ object.title }}</h2>
+                                    <h5>{{ object.title }}</h5>
                                     <hr class="w-50">
-                                    <p>
+                                    <p class="sfont">
                                         <span class="d-block d-lg-inline bg-info text-light p-2 rounded mb-2 mb-lg-0 ml-0 ml-lg-2">تاریخ ایجاد:‌ {{ object.created|to_jalali:'%H:%m:%S | 14%y/%m/%d' }}</span> <span class="bg-secondary text-light p-2 rounded d-block d-lg-inline">تاریخ تکمیل:‌ {{ object.datecomplete|to_jalali:'%H:%m:%S | 14%y/%m/%d' }}</span>
                                     </p>
-                                    <p class="mt-5">
+                                    <p class="mt-5 sfont">
                                         {% if object.memo %}
                                             توضیحات :{{ object.memo }}
                                         {% else %}
                                             توضیحات: ندارد.
                                         {% endif %}
                                     </p>
-                                    <h5 class="{% if todo.important %}text-danger {% else %}text-warning{% endif %}">
+                                    <h6 class="{% if todo.important %}text-danger {% else %}text-warning{% endif %}">
                                         {% if todo.important %}
                                             به عنوان کار مهم علامت گذاری شده است.
                                         {% else %}
                                             به عنوان کار مهم علامت گذاری نشده است.
                                         {% endif %}
-                                    </h5>
+                                    </h6>
                                 </div>
                             </div>
                             
