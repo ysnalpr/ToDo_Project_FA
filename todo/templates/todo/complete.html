@@ -2,6 +2,7 @@
 {% load static %}
 {% load base_tags %}
 {% load jalali_tags %}
+{% load humanize %}
 
 {% block title %}لیست کارهای تکمیل شده{% endblock %}
 
@@ -57,8 +58,8 @@
                                                     {% for todo in object_list %}
                                                         <tr {% if todo.important %} class="table-danger"{% endif %}>
                                                             <td>{{ todo.title }}</td>
-                                                            <td>{{ todo.created|to_jalali:'14%y/%m/%d' }}</td>
-                                                            <td>{{ todo.datecomplete|to_jalali:'14%y/%m/%d' }}</td> 
+                                                            <td>{{ todo.created|naturaltime }}</td>
+                                                            <td>{{ todo.datecomplete|naturaltime }}</td> 
                                                             {% if todo.important %} 
                                                                 <td>*</td> 
                                                             {% else %}

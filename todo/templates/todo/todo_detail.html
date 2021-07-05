@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load jalali_tags %}
+{% load humanize %}
 
 {% block title %} {{ object.title }} {% endblock %}
 
@@ -36,7 +37,7 @@
                                     <h5>{{ object.title }}</h5>
                                     <hr class="w-50">
                                     <p class="sfont2">
-                                        <span class="d-block d-lg-inline bg-info text-light p-2 rounded mb-2 mb-lg-0 ml-0 ml-lg-2">تاریخ ایجاد:‌ {{ object.created|to_jalali:'%H:%m:%S | 14%y/%m/%d' }}</span> <span class="bg-secondary text-light p-2 rounded d-block d-lg-inline">تاریخ تکمیل:‌ {{ object.datecomplete|to_jalali:'%H:%m:%S | 14%y/%m/%d' }}</span>
+                                        <span class="d-block d-lg-inline bg-info text-light p-2 rounded mb-2 mb-lg-0 ml-0 ml-lg-2">تاریخ ایجاد:‌ {{ object.created|to_jalali:'14%y/%m/%d' }} | {{ object.created|naturaltime }} </span> <span class="bg-secondary text-light p-2 rounded d-block d-lg-inline">تاریخ تکمیل:‌ {{ object.datecomplete|to_jalali:'14%y/%m/%d' }} | {{ object.datecomplete|naturaltime }}</span>
                                     </p>
                                     <p class="mt-5 sfont2">
                                         {% if object.memo %}

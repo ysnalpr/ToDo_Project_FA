@@ -1,3 +1,4 @@
+{% load humanize %}
 <div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -12,7 +13,9 @@
                     <thead class="text-white bg-info">
                         <tr>
                             <th scope="col">عنوان</th>
-                            <th scope="col">توضیحات</th>
+                            <th scope="col">
+                                {{ theader }}
+                            </th>
                             <th scope="col"> </th>
                         </tr>
                     </thead>
@@ -20,15 +23,10 @@
                         {% for todo in latest_todos %}
                             <tr {% if todo.important %} class="table-danger"{% endif %}>
                                 <td>{{ todo.title }}</td>
-                                {% if todo.memo %}
-                                    <td>
-                                        <details>
-                                            <summary>توضیحات</summary>
-                                            <p>{{ todo.memo }}</p>
-                                        </details>
-                                    </td>
+                                {% if todo.created %}
+                                    <td>{{ todo.created|naturaltime }}</td>
                                 {% else %}
-                                    <td></td>
+                                    <td>{{ todo.datecomplete|naturaltime }}</td>
                                 {% endif %}
                                 <td>
                                     {% if not todo.datecomplete %}
