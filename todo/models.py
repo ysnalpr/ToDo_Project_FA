@@ -1,10 +1,11 @@
 from django.db import models
 from account.models import User
 from django.urls import reverse
+from random import randint
 
-# Create your models here.
 
 class ToDo(models.Model):
+    id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
     title = models.CharField(max_length=100, verbose_name='عنوان')
     memo = models.TextField(blank=True, null=True, verbose_name='توضیحات')
@@ -18,3 +19,12 @@ class ToDo(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self):
+        if not self.id:
+            is_unique = False
+            while not is_unique:
+                id = randint(1000000000000000000, 1999999999999999999) # 19 digits: 1, random 18 digits
+                is_unique = not ToDo.objects.filter(id=id).exists()
+            self.id = id
+        super(ToDo, self).save()

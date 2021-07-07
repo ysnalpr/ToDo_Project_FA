@@ -5,7 +5,7 @@
 
 {% block title %}
     {% if object %}
-        ویرایش کار
+        ویرایش « {{ object.title }} »
     {% else %}
         ایجاد کار جدید
     {% endif %}
@@ -32,7 +32,7 @@
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800 mx-auto IranBold text-center">
                             {% if object %}
-                                <div>ویرایش کار</div>
+                                <div>ویرایش « {{ object.title }} »</div>
                                 <hr>
                                 <div class="text-muted small mt-2">تاریخ ایجاد:‌ {{ object.created|to_jalali:'14%y/%m/%d' }}</div>
                             {% else %}

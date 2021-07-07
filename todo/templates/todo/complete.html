@@ -50,8 +50,8 @@
                                                         <th scope="col">عنوان</th>
                                                         <th scope="col">کی ایجاد شد؟</th>
                                                         <th scope="col">کی کامل شد؟</th>
-                                                        <th scope="col">مهم</th>
-                                                        <th scope="col"> </th>
+                                                        <th scope="col" style="width: 5%">مهم</th>
+                                                        <th scope="col" style="width: 35%"> </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="sfont">
@@ -66,8 +66,8 @@
                                                                 <td></td>
                                                             {% endif %}
                                                             <td>
-                                                                <a class="btn btn-sm btn-primary font-weight-bold mb-2 mb-md-0" href="{% url 'todo:todo_detail' todo.pk %}" style="padding: 5px 13px;">جزئیات</a>
-                                                                <a class="btn btn-sm btn-danger font-weight-bold mb-2 mb-md-0" href="{% url 'todo:todo_delete' todo.pk %}" style="padding: 5px 20px;">حذف</a>
+                                                                <a class="btn btn-sm btn-primary font-weight-bold mb-2 mb-lg-0" href="{% url 'todo:todo_detail' todo.pk %}" style="padding: 5px 13px;">جزئیات</a>
+                                                                <a class="btn btn-sm btn-danger font-weight-bold mb-2 mb-lg-0" href="{% url 'todo:todo_delete' todo.pk %}" style="padding: 5px 20px;">حذف</a>
                                                                 <div class="badge badge-info font-weight-bold " style="padding: 10px 15px;"><span>کامل شد</span></div>
                                                             </td>
                                                         </tr>                                                  
